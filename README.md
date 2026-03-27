@@ -205,7 +205,7 @@ If you want to integrate 🌐💬 Aphra as a dependency in your own project, you
     Or add it manually to your `Pipfile`:
     ```toml
     [dev-packages]
-    aphra = {git = "https://github.com/DavidLMS/aphra.git", ref = "v2.1.0"}
+    aphra = {git = "https://github.com/DavidLMS/aphra.git", ref = "v2.2.0"}
     ```
 
     You can also point to `main` instead of a version tag to get the latest changes, but pinning a release avoids unexpected breaking changes.
