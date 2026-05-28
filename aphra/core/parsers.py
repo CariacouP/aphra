@@ -41,8 +41,8 @@ def parse_xml_tag(content: str, tag_name: str) -> Optional[str]:
         end_index = content.find(end_tag, start_index)
 
         if end_index == -1:
-            logging.warning("End tag '</%s>' not found in content", tag_name)
-            return None
+            logging.warning("End tag '</%s>' not found in content, salvaging partial content", tag_name)
+            return content[start_index:].strip()
 
         extracted_content = content[start_index:end_index].strip()
         return extracted_content

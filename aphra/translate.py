@@ -18,7 +18,7 @@ def load_model_client(config_file):
     """
     return LLMModelClient(config_file)
 
-def translate(source_language, target_language, text, config_file="config.toml", log_calls=False, workflow=None):
+def translate(source_language, target_language, text, config_file="config.toml", log_calls=False, workflow=None, input_file=None):
     """
     Translates the provided text from the source language to the target language using workflows.
 
@@ -41,7 +41,8 @@ def translate(source_language, target_language, text, config_file="config.toml",
         model_client=model_client,
         source_language=source_language,
         target_language=target_language,
-        log_calls=log_calls
+        log_calls=log_calls,
+        metadata={"input_file": input_file} if input_file else {}
     )
 
     # Get workflow: by name if specified, otherwise auto-select

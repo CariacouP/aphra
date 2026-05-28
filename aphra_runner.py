@@ -81,9 +81,12 @@ def main():
         target_language=args.target,
         text=text,
         config_file=config_file,
-        workflow=args.workflow
+        workflow=args.workflow,
+        input_file=input_file
     )
 
+    import os
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(translated_text)
 

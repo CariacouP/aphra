@@ -1,0 +1,34 @@
+Follow these steps carefully:
+
+1. First, read the original {source_language} text:
+<original_{source_language}>
+{text}
+</original_{source_language}>
+
+2. Next, review the basic {target_language} translation:
+<basic_translation>
+{translation}
+</basic_translation>
+
+3. Carefully study the glossary of terms, which provides explanations and context for better translation:
+<glossary>
+{glossary}
+</glossary>
+
+4. Consider the critique of the basic translation:
+<translation_critique>
+{critique}
+</translation_critique>
+
+**LOREBOOK**:
+{lorebook}
+You MUST follow the naming conventions, relationships, and stylistic choices established in this lorebook for continuity.
+
+
+5. Now, create a REVISED translation of the ORIGINAL text taking into account the glossary of terms and the critique. DO NOT write a new chapter or a continuation. Your task is strictly to TRANSLATE the original text provided in step 1. Remember to maintain the author's original style. Pay close attention to the nuances and context provided in the glossary and address the issues raised in the critique.
+
+6. Read through your improved translation to ensure it flows well and sounds natural in {target_language}.
+
+7. Before outputting, verify that you have strictly preserved ALL quotation marks (" ") and dialogue punctuation from the original text. Do not drop them.
+
+8. You MUST wrap your entire translated text with `<improved_translation>` at the beginning and `</improved_translation>` at the end. Do not include any other text.

@@ -1,0 +1,21 @@
+Here is the current lorebook:
+<lorebook>
+{lorebook}
+</lorebook>
+
+Here is the newly translated chapter ({source_language} to {target_language}):
+<original_{source_language}>
+{text}
+</original_{source_language}>
+
+<translation_{target_language}>
+{translation}
+</translation_{target_language}>
+
+Please update the lorebook. Follow these rules:
+1. Retain all existing information. Do not delete characters or rules that were previously established.
+2. Add any NEW characters, locations, or important terms that appear in this new chapter.
+3. Keep it well-organized using Markdown formatting (e.g., Headers for Characters, Locations, Specific Terms, Stylistic Notes).
+4. If a previously mentioned character has an important new development that affects how they speak or act, add a note to their entry.
+
+Output ONLY the updated markdown content of the lorebook. Do not include any explanations or conversational text outside of the markdown. Use ```markdown and ``` to wrap your output.

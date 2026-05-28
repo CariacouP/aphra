@@ -1,0 +1,37 @@
+Here is the {source_language} text you need to analyze:
+
+<{source_language}_text>
+{post_content}
+</{source_language}_text>
+
+**LOREBOOK**:
+{lorebook}
+Use the lorebook to understand established character names, terms, and stylistic choices so you don't extract already known terms unnecessarily, or you extract new ones that contradict them.
+
+
+Please follow these steps:
+
+1. Carefully read and analyze the {source_language} text.
+
+2. Identify and list any terms, phrases, or cultural references that may be difficult for an {target_language}-speaking audience to understand. This may include:
+   - Idiomatic expressions
+   - Legal {source_language} terms
+   - Culturally specific terms or concepts
+   - Historical or geographical references
+   - Wordplay or puns that don't translate directly
+
+The choices must be present in the text.
+
+Present your analysis in the following format:
+
+<reasoning>
+Reasoning about the suitability of the chosen terms and/or phrases.
+</reasoning>
+
+<analysis>
+<item><name>{source_language} term/phrase 1</name><keywords>keywords that you would use in a search engine to get the proper context of the term</keywords></item>
+<item><name>{source_language} term/phrase 1</name><keywords>keywords that you would use in a search engine to get the proper context of the term</keywords></item>
+(Continue for all identified elements)
+</analysis>
+
+Remember to be thorough in your analysis and explanations, considering both linguistic and cultural aspects of the text.
