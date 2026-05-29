@@ -22,30 +22,24 @@ def parse_xml_tag(content: str, tag_name: str) -> Optional[str]:
 
     Returns:
         str: The content within the tags, or None if not found
-
-    Example:
-        >>> content = "Some text <result>Hello World</result> more text"
-        >>> parse_xml_tag(content, "result")
-        "Hello World"
     """
     try:
-        start_tag = f"<{tag_name}>"
-        end_tag = f"</{tag_name}>"
+        # Use regex to be more tolerant (handles attributes, case, spaces)
+        pattern = f"<{tag_name}[^>]*>(.*?)</{tag_name}>"
+        match = re.search(pattern, content, re.DOTALL | re.IGNORECASE)
 
-        start_index = content.find(start_tag)
-        if start_index == -1:
-            logging.warning("Start tag '<%s>' not found in content", tag_name)
-            return None
+        if match:
+            return match.group(1).strip()
 
-        start_index += len(start_tag)
-        end_index = content.find(end_tag, start_index)
+        # Fallback if closing tag is missing or malformed
+        start_pattern = f"<{tag_name}[^>]*>"
+        start_match = re.search(start_pattern, content, re.IGNORECASE)
+        if start_match:
+            logging.warning("End tag for '%s' not found, salvaging partial content", tag_name)
+            return content[start_match.end():].strip()
 
-        if end_index == -1:
-            logging.warning("End tag '</%s>' not found in content, salvaging partial content", tag_name)
-            return content[start_index:].strip()
-
-        extracted_content = content[start_index:end_index].strip()
-        return extracted_content
+        logging.warning("Start tag '%s' not found in content", tag_name)
+        return None
 
     except Exception as exc:
         logging.error("Error parsing XML tag '%s': %s", tag_name, exc)
@@ -61,16 +55,11 @@ def parse_multiple_xml_tags(content: str, tag_name: str) -> list[str]:
 
     Returns:
         list[str]: List of content within all matching tags
-
-    Example:
-        >>> content = "Text <item>First</item> more <item>Second</item> end"
-        >>> parse_multiple_xml_tags(content, "item")
-        ["First", "Second"]
     """
     try:
-        # Use regex to find all occurrences
-        pattern = f"<{re.escape(tag_name)}>(.*?)</{re.escape(tag_name)}>"
-        matches = re.findall(pattern, content, re.DOTALL)
+        # Use regex to find all occurrences, tolerant of attributes/spaces
+        pattern = f"<{tag_name}[^>]*>(.*?)</{tag_name}>"
+        matches = re.findall(pattern, content, re.DOTALL | re.IGNORECASE)
 
         # Strip whitespace from each match
         results = [match.strip() for match in matches]

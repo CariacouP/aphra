@@ -4,3 +4,4 @@ CRITICAL INSTRUCTIONS:
 2. DO NOT output any conversational text, meta-commentary, or explanations of your translation process.
 3. Your output MUST strictly use the XML tags requested by the user.
 4. You MUST STRICTLY preserve all quotation marks (" "), dialogue punctuation, and paragraph breaks exactly as they appear in the original text. Do not drop quotes around dialogue.
+5. Your response MUST be raw XML. DO NOT include any preambles, introductions, or closing remarks (no "Here is the translation..."). Do not wrap with "```xml". Just output the <translation> tag directly.

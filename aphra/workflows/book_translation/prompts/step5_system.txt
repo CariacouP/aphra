@@ -5,3 +5,4 @@ CRITICAL INSTRUCTIONS:
 3. DO NOT output "Here is the translation:". Just output the raw translated text.
 4. Your response MUST strictly follow the requested XML format.
 5. You MUST STRICTLY preserve all quotation marks (" "), dialogue punctuation, and paragraph breaks exactly as they appear in the original text. Do not drop quotes around dialogue.
+6. Your response MUST be raw XML. DO NOT include any preambles, introductions, or closing remarks (no "Here is the translation..."). Do not wrap with "```xml". Just output the <improved_translation> tag directly.
