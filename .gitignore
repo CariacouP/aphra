@@ -5,4 +5,3 @@ config.toml
 __pycache__
 Traduction_Livres/
 venv/
-.agents/
