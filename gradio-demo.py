@@ -88,7 +88,7 @@ def create_config_file(api_key, writer_model, searcher_model, critic_model):
         toml.dump(config, tmp)
     return tmp.name
 
-def process_input(file, text_input, api_key, writer_model, searcher_model, critic_model, source_lang, target_lang, workflow_name):
+def process_input(file, text_input, api_key, writer_model, searcher_model, critic_model, source_lang, target_lang, workflow_name, progress=gr.Progress(track_tqdm=True)):
     """
     Process translation input from either file or text input.
 
@@ -106,14 +106,26 @@ def process_input(file, text_input, api_key, writer_model, searcher_model, criti
     Returns:
         str: Translated text
     """
+    if not api_key:
+        raise gr.Error("La clé API OpenRouter est requise.")
+
     if file is not None:
-        with open(file, 'r', encoding='utf-8') as file:
-            text = file.read()
+        try:
+            with open(file, 'r', encoding='utf-8') as f:
+                text = f.read()
+        except Exception as e:
+            raise gr.Error(f"Échec de la lecture du fichier : {e}")
     else:
         text = text_input
+
+    if not text or not text.strip():
+        raise gr.Warning("Aucun texte fourni pour la traduction.")
+
+    progress(0.1, desc="Création de la configuration...")
     config_file = create_config_file(api_key, writer_model, searcher_model, critic_model)
     selected_workflow = None if workflow_name == "Auto" else workflow_name
     try:
+        progress(0.2, desc=f"Démarrage de la traduction (Workflow : {selected_workflow or 'Auto'})...")
         translation = translate(
             source_language=source_lang,
             target_language=target_lang,
@@ -122,6 +134,9 @@ def process_input(file, text_input, api_key, writer_model, searcher_model, criti
             log_calls=False,
             workflow=selected_workflow
         )
+        progress(1.0, desc="Traduction terminée !")
+    except Exception as e:
+        raise gr.Error(f"Échec de la traduction : {e}")
     finally:
         os.unlink(config_file)
 
